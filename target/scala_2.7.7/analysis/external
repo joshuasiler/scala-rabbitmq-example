@@ -1,0 +1,4 @@
+#External Dependencies
+#Sun Oct 10 13:31:08 PDT 2010
+/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar=src/main/scala/rabbittest/RabbitTest.scala
+/Users/joshuas/dev/RabbitTest/project/boot/scala-2.7.7/lib/scala-library.jar=src/main/scala/rabbittest/RabbitTest.scala
