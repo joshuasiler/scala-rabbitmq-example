@@ -1,0 +1,2 @@
+Shows off connecting to rabbitMQ using scala. Uses the 1.8.1 version of com.rabbitmq.amqp-client to be compatible with pre-2.0 RabbitMQ. Use newer version of the library with 2.0+ rabbit instance.
+
