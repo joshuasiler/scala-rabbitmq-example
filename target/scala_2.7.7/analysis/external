@@ -1,5 +1,5 @@
 #External Dependencies
-#Sun Oct 10 14:12:15 PDT 2010
-/Users/joshuas/dev/RabbitTest/lib_managed/scala_2.7.7/compile/amqp-client-2.1.0.jar=src/main/scala/rabbittest/RabbitTest.scala
-/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar=src/main/scala/rabbittest/RabbitTest.scala
-/Users/joshuas/dev/RabbitTest/project/boot/scala-2.7.7/lib/scala-library.jar=src/main/scala/rabbittest/RabbitTest.scala
+#Mon Oct 11 09:28:34 PDT 2010
+/home/joshuas/dev/RabbitTest/project/boot/scala-2.7.7/lib/scala-library.jar=src/main/scala/rabbittest/RabbitTest.scala
+/home/joshuas/dev/RabbitTest/lib_managed/scala_2.7.7/compile/amqp-client-1.8.1.jar=src/main/scala/rabbittest/RabbitTest.scala
+/usr/lib/jvm/java-6-sun-1.6.0.20/jre/lib/rt.jar=src/main/scala/rabbittest/RabbitTest.scala

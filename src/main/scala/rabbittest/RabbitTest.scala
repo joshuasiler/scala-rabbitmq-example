@@ -5,23 +5,37 @@ object RabbitTest extends Application
 {
     println("start")
     var channel = getAMQPChannel("test", "/")
-    
+    var consumer: QueueingConsumer = null
+    while (true) {
+      var task: QueueingConsumer.Delivery = null
+      try { task = consumer.nextDelivery() }
+      catch {
+        case ex: Exception => {
+          println("Error in AMQP connection: reconnecting.")//, ex)
+		  Thread.sleep(1000)
+          channel = getAMQPChannel("test", "/")
+        }
+      }
+	
+	  if (task != null && task.getBody() != null) {
+        println(new String(task.getBody()))
+        try { channel.basicAck(task.getEnvelope().getDeliveryTag(), false) }
+        catch {
+          case ex: Exception => { println("Error ack'ing message.", ex) }
+        }
+      }
+	}
+	
     // Opens up a connection to RabbitMQ, retrying every five seconds
   // if the queue server is unavailable.
   def getAMQPChannel(queue: String, vhost: String) : Channel = {
     var attempts = 0
     var channel: Channel = null
     var connection: Connection = null
-    var consumer: QueueingConsumer = null
     
     println("Opening connection to AMQP " + vhost + " "  + queue + "...")
-
-    while (true) {
-      attempts += 1
-      println("Attempt #" + attempts)
-
       try {
-        connection = getConnection(queue, "localhost", 5768, "guest", "guest",vhost)
+        connection = getConnection(queue, "localhost", 5672, "guest", "guest",vhost)
         channel = connection.createChannel()
         consumer = new QueueingConsumer(channel)
         channel.exchangeDeclare(queue, "direct", true)
@@ -29,15 +43,11 @@ object RabbitTest extends Application
         channel.queueBind(queue, queue, queue)
         channel.basicConsume(queue, false, consumer)
         println("Connected to RabbitMQ")
-        channel
       } catch {
         case ex: Exception => {
-          println("Cannot connect to AMQP. Retrying in 5 sec.", ex)
-          Thread.sleep(1000 * 5)
-        }
-      }
+          println(".....cannot connect to AMQP. ")//, ex)
+       } 
     }
-
     channel
   }
   
